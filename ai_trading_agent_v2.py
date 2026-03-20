@@ -17,7 +17,7 @@ CLAUDE FİLTRE (AI, judgment):
 Paper trading: $10,000 sanal sermaye
 Hedef: 20+ trade → win rate + profit factor değerlendir
 """
-
+from dashboard import start_dashboard, update_scan_data
 import time
 import json
 import re
@@ -997,7 +997,7 @@ def main():
         f"💰 ${STARTING_CAPITAL:,} | ⏱ {SCAN_INTERVAL//60}dk\n\n"
         "/portfolio /trades /stats /help"
     )
-
+start_dashboard()
     scan = 0
     while True:
         try:
@@ -1122,7 +1122,22 @@ def main():
                 total += pos["size_usd"]
             pnl = total - STARTING_CAPITAL
             n_pos = len(portfolio.get("positions", {}))
-            log("💼", f"${total:,.0f} ({pnl:+,.0f}) | {n_pos} poz | ${portfolio['cash']:,.0f} nakit")
+          
+            update_scan_data(
+                {k: {key: v[key] for key in ["price","change_pct","rsi","trend","cross","ema_cross_recent","macd_hist","name","signal_summary"] if key in v} for k,v in all_data.items()},
+                [{"ticker":s["ticker"],"direction":s["direction"],"score":s["score"],"rsi":s["rsi"],"reasons":s["reasons"]} for s in raw_signals],
+                scan
+            )
+```
+
+Sonra **Commit changes**.
+
+## Adım 3: Railway'de PORT ekle
+
+Railway → ai-trading-agent servisi → **Variables** → ekle:
+```
+PORT=8080
+log("💼", f"${total:,.0f} ({pnl:+,.0f}) | {n_pos} poz | ${portfolio['cash']:,.0f} nakit")
             log("💤", f"{SCAN_INTERVAL//60}dk bekleniyor")
 
             # Günlük karne
