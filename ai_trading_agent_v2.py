@@ -30,7 +30,7 @@ PORTFOLIO_FILE = "portfolio.json"
 TRADES_FILE = "trades.json"
 STATE_FILE = "agent_state.json"
 
-STOCKS = {"AAPL": "Apple", "TSLA": "Tesla", "NVDA": "NVIDIA", "MSFT": "Microsoft", "GOOGL": "Google", "AMZN": "Amazon", "META": "Meta", "SPY": "S&P 500 ETF", "QQQ": "Nasdaq ETF", "AMD": "AMD"}
+STOCKS = {"AAPL": "Apple", "TSLA": "Tesla", "NVDA": "NVIDIA", "MSFT": "Microsoft", "GOOGL": "Google", "AMZN": "Amazon", "META": "Meta", "SPY": "S&P 500 ETF", "QQQ": "Nasdaq ETF", "AMD": "AMD", "GLD": "Gold ETF", "SLV": "Silver ETF", "USO": "Oil ETF"}
 CRYPTO = {"bitcoin": {"symbol": "BTC", "name": "Bitcoin"}, "ethereum": {"symbol": "ETH", "name": "Ethereum"}, "solana": {"symbol": "SOL", "name": "Solana"}, "ripple": {"symbol": "XRP", "name": "Ripple"}, "dogecoin": {"symbol": "DOGE", "name": "Dogecoin"}}
 
 latest_scan = {"assets": {}, "signals": [], "scan_number": 0, "last_scan_time": None}
